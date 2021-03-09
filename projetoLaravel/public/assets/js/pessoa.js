@@ -149,12 +149,15 @@ $(function(){
             },
             error: function(error){
                 let msgErrors = '';
-                Object.entries(error.responseJSON.errors).forEach(erro => {
-                    msgErrors += `<p>- ${erro[1]}</p>`;
-                });
+                if(error.status) {
+                    Object.entries(error.responseJSON.errors).forEach(erro => {
+                        msgErrors += `<p>- ${erro[1]}</p>`;
+                    });
+                } else {
+                    msgErrors = '<p>- Erro ao enviar formulário, tente novamente mais tarde!!!</p>';
+                }
                 $('#errors').html(msgErrors).fadeIn(1000);
             }
-            
         });
     });
 
