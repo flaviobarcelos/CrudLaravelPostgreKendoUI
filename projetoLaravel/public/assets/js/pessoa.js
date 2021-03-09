@@ -39,7 +39,7 @@ function generoEditor(container, options) {
 }
 
 $(function(){
-    let optionPais = '<option>Selecione</option>';
+    let optionPais = '<option value="">Selecione a nascionalidade</option>';
     paisesList.map((pais) => {
         optionPais += `<option value="${pais.id}">${pais.nome}</option>`;
     });
@@ -134,31 +134,28 @@ $(function(){
     });
 
     $('#btSubmit').click(function(){
-        const hoje = new Date();
-        const nascimento = new Date($('#nascimento').val());
-        if(hoje > nascimento) {
-            $.ajax({
-                type: "POST",          
-                url: urlBase + 'api/pessoa',
-                data: {
-                    nome: $('#nome').val(),
-                    nascimento: $('#nascimento').val(),
-                    genero: $('#genero').val(),
-                    pais_id: $('#pais_id').val()
-                },
-                success: function(exibir) {
-                    alert('Pessoa inserido com sucesso!');
-                    window.location.href = urlBase;
-                },
-                error: function(erro){
-                    alert(erro);
-                }
-                
-            });
-        } else {
-            alert('Data de nascimento não pode ser maior que a data atual');
-            $('#nascimento').val('');
-        }
+        $.ajax({
+            type: "POST",          
+            url: urlBase + '/api/pessoa',
+            data: {
+                nome: $('#nome').val(),
+                nascimento: $('#nascimento').val(),
+                genero: $('#genero').val(),
+                pais_id: $('#pais_id').val()
+            },
+            success: function(exibir) {
+                alert('Pessoa inserido com sucesso!');
+                window.location.href = urlBase;
+            },
+            error: function(error){
+                let msgErrors = '';
+                Object.entries(error.responseJSON.errors).forEach(erro => {
+                    msgErrors += `<p>- ${erro[1]}</p>`;
+                });
+                $('#errors').html(msgErrors).fadeIn(1000);
+            }
+            
+        });
     });
 
 });

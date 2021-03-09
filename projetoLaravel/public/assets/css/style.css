@@ -1,0 +1,11 @@
+#errors {
+    background: red;
+    color: #ffffff;
+    width: 80%;
+    display: none;
+    margin: 20px auto;
+}
+
+#errors p {
+    margin-left: 10px;
+}

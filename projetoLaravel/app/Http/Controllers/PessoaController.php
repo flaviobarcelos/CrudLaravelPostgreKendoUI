@@ -38,8 +38,18 @@ class PessoaController extends Controller
 
     public function create(Request $request)
     {
+        $request->validate([
+            'nome' => 'required',
+            'nascimento' => 'required|date|before:tomorrow',
+            'pais_id' => 'required'
+        ],
+        [
+            'required' => 'Campo :attribute é obrigatório',
+            'nascimento.before' => 'Data de nascimento precisa ser menor que data atual',
+            'pais_id.required' => 'Campo nascionalidade é obrigatório'
+        ]);
+
         return $this->service->create($request->all());
-        // return view('pessoa', ['paises' => $this->paises]);
     }
 
     public function delete(Request $request)
