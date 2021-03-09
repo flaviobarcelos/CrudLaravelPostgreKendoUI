@@ -7,7 +7,7 @@
                     <button type="button" class="btn-close" onClick="hideModal('CadUser')" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div id="errors">teste <br></div>
+                    <div class="alert alert-danger" role="alert" id="errors"></div>
                     <p>
                         <input placeholder="Nome da pessoa" type="text" id="nome" name="nome" class="form-control" required/>
                     </p>

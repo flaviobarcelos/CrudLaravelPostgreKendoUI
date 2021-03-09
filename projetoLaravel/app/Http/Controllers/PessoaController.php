@@ -46,7 +46,7 @@ class PessoaController extends Controller
         [
             'required' => 'Campo :attribute é obrigatório',
             'nascimento.before' => 'Data de nascimento precisa ser menor que data atual',
-            'pais_id.required' => 'Campo nascionalidade é obrigatório'
+            'pais_id.required' => 'Campo nacionalidade é obrigatório'
         ]);
 
         return $this->service->create($request->all());
